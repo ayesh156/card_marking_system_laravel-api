@@ -676,6 +676,11 @@ class StudentReportController extends Controller
 
     public function fetchStudentData(Request $request)
     {
+        // ✅ FETCH CURRENT MONTH + YEAR
+        $currentYearMonth = $this->getCurrentYearAndMonthId();
+        $currentYearId = $currentYearMonth['year_id'];
+        $currentMonthId = $currentYearMonth['month_id'];
+
         // Map class codes to their names
         $classMap = [
             'E' => 'English',
@@ -798,10 +803,12 @@ class StudentReportController extends Controller
         }
 
         // Step 7: Check for data in the 'students_has_tuitions' table and determine registration and special status
-        $studentData = $studentTuitions->map(function ($studentTuition) use ($exactMatchingTuitions, $globalWhatsappCounts) {
+        $studentData = $studentTuitions->map(function ($studentTuition) use ($exactMatchingTuitions, $globalWhatsappCounts, $currentYearId, $currentMonthId) {
             $student = $studentTuition->student;
             $report = StudentReport::where('student_id', $student->id)
                 ->whereIn('tuition_id', $exactMatchingTuitions->pluck('id'))
+                ->where('year_id', $currentYearId)      // ✅ FILTER by current year
+                ->where('month_id', $currentMonthId)    // ✅ FILTER by current month
                 ->first();
 
             // Check if any of the specified fields are null
