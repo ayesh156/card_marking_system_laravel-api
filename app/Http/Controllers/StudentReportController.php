@@ -948,7 +948,7 @@ class StudentReportController extends Controller
             $report = $reportsByStudentId->get($student->id); // Get the report for the student, if it exists
 
             // Check if any of the specified fields are null
-            $fieldsToCheck = ['address1', 'school', 'g_name', 'g_mobile', 'gender', 'dob', 'created_at'];
+            $fieldsToCheck = ['dob'];
             $isRegistered = true;
 
             foreach ($fieldsToCheck as $field) {
