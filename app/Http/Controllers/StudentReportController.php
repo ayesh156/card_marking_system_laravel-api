@@ -812,7 +812,8 @@ class StudentReportController extends Controller
                 ->first();
 
             // Check if any of the specified fields are null
-            $fieldsToCheck = ['address1', 'school', 'g_name', 'g_mobile', 'dob'];
+            // $fieldsToCheck = ['address1', 'school', 'g_name', 'g_mobile', 'dob'];
+            $fieldsToCheck = ['dob'];
             $isRegistered = true;
 
             foreach ($fieldsToCheck as $field) {
