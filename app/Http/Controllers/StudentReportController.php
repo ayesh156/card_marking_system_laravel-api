@@ -249,6 +249,8 @@ class StudentReportController extends Controller
             }
         } elseif ($categoryName === 'spoken') { // <-- Adjust this range as needed
             $templateColumn = 'after_payment_spoken_template';
+        } elseif ($categoryName === 'group') { // <-- Adjust this range as needed
+            $templateColumn = 'after_payment_group_template';
         }
 
         // Fetch the template from the user table
