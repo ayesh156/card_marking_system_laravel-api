@@ -495,8 +495,6 @@ class StudentReportController extends Controller
         ];
     }
 
-
-
     public function sendPaymentReminders(Request $request)
     {
         // Retrieve the userEmail from the request
@@ -529,7 +527,7 @@ class StudentReportController extends Controller
         }
 
         // Assign a custom date for testing purposes
-        // $customDate = '2025-05-18'; // Replace this with your desired date
+        // $customDate = '2025-06-21'; // Replace this with your desired date
         // $now = Carbon::parse($customDate); // Parse the custom date
         // $today = $now->startOfDay(); // Use this for today's date
 
@@ -601,7 +599,7 @@ class StudentReportController extends Controller
 
         // Process reminders for each tuition
         foreach ($tuitions as $tuition) {
-            $dayId = $tuition->day_id; // 0=Sunday, 1=Monday, etc.
+            $dayId = ($tuition->day_id == 7) ? 0 : $tuition->day_id; // Normalize Sunday // 0=Sunday, 1=Monday, etc.
 
             // Find all class days for this tuition in the current month
             $classDays = [];
